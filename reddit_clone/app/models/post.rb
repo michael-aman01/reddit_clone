@@ -12,6 +12,7 @@
 #  updated_at    :datetime         not null
 #
 class Post < ApplicationRecord
-  belongs_to :sub
-  belongs_to :author
+  belongs_to :postable, polymorphic: true
+
+
 end

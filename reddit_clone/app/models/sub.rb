@@ -11,5 +11,18 @@
 #  updated_at  :datetime         not null
 #
 class Sub < ApplicationRecord
-  belongs_to :user
+  validates :user_id, :title, presence: true
+  validates_uniqueness_of :title
+
+
+  
+   
+belongs_to :moderator,
+    class_name: :User,
+    foreign_key: :user_id
+
+  has_many :posts, as: :postables, dependent: :destroy
+                         
+
+
 end

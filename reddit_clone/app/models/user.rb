@@ -17,6 +17,8 @@ class User < ApplicationRecord
     
     attr_reader :password
 
+    has_many :posts, as: :postable, dependent: :destroy
+
 
     def self.find_by_credentials(username, pw)
         @user = User.find_by(username: username)
