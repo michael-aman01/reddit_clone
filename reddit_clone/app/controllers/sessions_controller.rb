@@ -8,9 +8,11 @@ class SessionsController < ApplicationController
     end
 
     def create
+
         @user = User.find_by_credentials( params[:user][:username], params[:user][:password])
         if @user
-            render :new
+            login!(@user)
+            redirect_to users_url
         else
             @user = User.new(username: params[:user][:username],password: params[:user][:password])
             flash.now[:errors] = @user.errors.full_messages
