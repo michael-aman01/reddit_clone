@@ -1,18 +1,25 @@
 class UsersController < ApplicationController
+
   before_action :set_user, only: %i[ show edit update destroy ]
+
+
+  # before_action :require_logged_in, only: [:index, :show]
 
   # GET /users
   def index
     @users = User.all
+    render :index
   end
 
   # GET /users/1
   def show
+    render :show
   end
 
   # GET /users/new
   def new
     @user = User.new
+    render :new
   end
 
   # GET /users/1/edit
@@ -48,11 +55,11 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+      @user = User.find_by(id: params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:username, :password_digest, :session_token)
+      params.require(:user).permit(:username, :password)
     end
 end
